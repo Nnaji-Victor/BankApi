@@ -12,12 +12,17 @@ namespace BankApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
         public string CustomerId { get; set; }
         public string AccounType { get; set; }
         public string Description { get; set; }
-        public float Balance { get; set; }
+        public string Balance { get; set; }
         public string Password { get; set; }
         public string AccountId { get; set; }
+        public string Date { get; set; }
 
     }
 }

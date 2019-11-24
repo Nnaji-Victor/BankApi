@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using BankApi.VM;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +14,32 @@ namespace BankApi.Controllers
     public class CustomerController : ControllerBase
     {
         // GET: api/Customer
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("balance")]
+        public string Get()
         {
-            return new string[] { "valueCustomer", "value2Customer" };
+            SqlConnection con = new SqlConnection(LoginController.conString);
+            string customer = LoginController.UserID;
+            con.Open();
+            string query = "select accountId,balance from [Account] where customerId=@user";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@user", customer);
+
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                string acc = dr[1].ToString();
+                con.Close();
+                return acc;
+            }
+            else
+            {
+                con.Close();
+                return "invalid";
+            }
+
+            
         }
 
         // GET: api/Customer/5
