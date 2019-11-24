@@ -6,15 +6,15 @@ BankApi implements some element of CRUD such as GET and POST so far. A user is a
 An Admin is able to login and create customers and accounts.
 
 # ✨ How To Use
-   ** login [HttpPost] **
+   **login [HttpPost]**
    
      ```json
-	https://api/login
+	   https://api/login
+     ```
 
-   ```
-   ** Get Account Balance **
+   **Get Account Balance**
    N.b: A user must sign in first to access their balance
-   ```json
-	https://api/customer/balance
 
-   ```
+	   ```json
+		https://api/customer/balance
+	   ```
