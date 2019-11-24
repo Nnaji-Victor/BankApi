@@ -8,13 +8,11 @@ An Admin is able to login and create customers and accounts.
 # ✨ How To Use
    **login [HttpPost]**
    
-     ```json
 	   https://api/login
-     ```
 
-   **Get Account Balance**
+   **Get Account Balance [HttpGet]**
+   
    N.b: A user must sign in first to access their balance
 
-	   ```json
-		https://api/customer/balance
-	   ```
+	   https://api/customer/balance
+
