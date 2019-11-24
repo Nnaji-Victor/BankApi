@@ -13,13 +13,13 @@ namespace BankApi.Controllers
     {
         // GET: api/Admin
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "value1", "value2" };  
         }
 
         // GET: api/Admin/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";

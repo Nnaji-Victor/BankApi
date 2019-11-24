@@ -1,0 +1,24 @@
+﻿Task
+Assume you have been asked to build a RESTful Service to support a wide variety of Banking Applications. As an Engineer, you are required to architect your service to expose the following functionality to client applications:
+1.	A User/Admin should be able to sign in
+2.	An Administrator should be able to create an account for a new Customer.
+3.	A Customer should be able to check his/her account balance
+4.	A Customer should be able to make withdrawals from his/her account
+5.	A Customer should be able to make transfers between accounts
+6.	A Customer should be able view a list of Transactions associated with their accounts
+Using the knowledge of ADO.NET and ASP.NET Core Web API you have acquired, build a RESTful API with End Points to support these client applications.
+Hint: Add two controllers (AdminController and CustomerController) with End Points to cater to this Software Solution’s requirements.
+The aim of this Task is to develop our problem-solving skills and do so within the context of an ASP.NET Core RESTful Service. Be creative. There’s no hard-and-fast rule as to how you ought to construct your routes. As an example, the End Point that allows an Admin to sign in could have the following route:
+
+https://api/admin/signin
+
+While the End Point that allows a Customer to check their account balance could look like this:
+
+https://api/customer/balance
+
+Test your API’s End Points thoroughly using Postman.
+
+Before you begin, create a local Git Repository and then connect it to a remote Github Repo.
+Send me a link to your repository on Github. I want to see your progress as you work on the project.
+
+Thank you.

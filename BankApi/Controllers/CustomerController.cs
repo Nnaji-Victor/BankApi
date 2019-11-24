@@ -15,11 +15,11 @@ namespace BankApi.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "valueCustomer", "value2Customer" };
         }
 
         // GET: api/Customer/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
