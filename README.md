@@ -39,7 +39,8 @@ An Admin is able to login and create customers and accounts.
 		"Date":"1/2/2019"
 		}
 
-	**Withdraw [HttpPost]**
+
+   **Withdraw [HttpPost]**
    
 	   https://api/customer/withdraw
 
@@ -49,7 +50,8 @@ An Admin is able to login and create customers and accounts.
 		"WithdrawAmount":2000.00
         }
 
-	**Deposit [HttpPost]**
+
+   **Deposit [HttpPost]**
    
 	   https://api/customer/deposit
 
