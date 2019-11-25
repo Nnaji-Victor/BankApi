@@ -25,7 +25,7 @@ An Admin is able to login and create customers and accounts.
       
 	   https://api/admin/register
 
-	   {
+	    {
 		"LastName":"Marcus",
 		"FirstName":"Rashford",
 		"City":"Manchester",
@@ -60,3 +60,14 @@ An Admin is able to login and create customers and accounts.
 		"Date":"24/9/2019",
 		"DepositAmount":2000.00
         }
+
+
+   **Transfer [HttpPost]**
+   
+	   https://api/customer/transfer
+
+	    {
+		"fromAccount":"6060000",
+		"toAccount":"6060001",
+		"Amount":1000
+		}

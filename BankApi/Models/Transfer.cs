@@ -9,9 +9,6 @@ namespace BankApi.Models
 {
     public class Transfer
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string FromAccount { get; set; }
         public string ToAccount { get; set; }
         public float Amount { get; set; }

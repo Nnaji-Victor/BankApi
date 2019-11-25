@@ -15,7 +15,7 @@ namespace BankApi.Controllers
     public class CustomerController : ControllerBase
     {
         SqlConnection con = new SqlConnection(LoginController.conString);
-        // GET: api/Customer
+        // GET: api/Customer/balance
         [HttpGet("balance")]
         public string Get()
         {
@@ -41,13 +41,6 @@ namespace BankApi.Controllers
             }
 
             
-        }
-
-        // GET: api/Customer/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST: api/Customer
@@ -114,7 +107,7 @@ namespace BankApi.Controllers
             }
         }
 
-        // POST: api/Customer
+        // POST: api/Customer/withdraw
         [HttpPost("withdraw")]
         public Response Post(Withdraw withdraw)
         {
@@ -154,23 +147,71 @@ namespace BankApi.Controllers
                 command.Parameters.AddWithValue("@bal", balance);
                 command.Parameters.AddWithValue("@withdraw", withdraw.WithdrawAmount);
 
-                command.CommandText = "INSERT INTO Transactions(AccountId,date,balance,deposit) VALUES(@accNum,@date,@bal,@withdraw)";
+                command.CommandText = "INSERT INTO Transactions(AccountId,date,balance,withdraw) VALUES(@accNum,@date,@bal,@withdraw)";
                 command.ExecuteNonQuery();
 
-                command.CommandText = "update [Account] set balance = balance +@deposit where accountId=@accNum";
+                command.CommandText = "update [Account] set balance = balance -@withdraw where accountId=@accNum";
                 command.ExecuteNonQuery();
 
                 transaction.Commit();
 
                 return new Response
-                { Status = "Success", Message = "Cash sucessfully deposited" };
+                { Status = "Success", Message = "Cash sucessfully withdrawn" };
 
             }
             catch
             {
                 transaction.Rollback();
                 return new Response
-                { Status = "Failed", Message = "Deposit failed!." };
+                { Status = "Failed", Message = "withdraw failed!." };
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        // POST: api/Customer/transfer
+        [HttpPost("transfer")]
+        public Response Post(Transfer transfer)
+        {
+            string date = DateTime.Now.ToString();
+           
+            con.Open();
+            SqlCommand command = con.CreateCommand();
+            SqlTransaction transaction;
+
+            transaction = con.BeginTransaction();
+            command.Connection = con;
+            command.Transaction = transaction;
+
+
+            try
+            {
+                command.Parameters.AddWithValue("@amount", transfer.Amount);
+                command.Parameters.AddWithValue("@frmAccnt", transfer.FromAccount);
+                command.Parameters.AddWithValue("@toAccnt", transfer.ToAccount);
+                command.Parameters.AddWithValue("@date", date);
+
+                command.CommandText = "insert into Transfer(frmAccount,toAccount,amount,date) values(@frmAccnt,@toAccnt,@amount,@date)";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "update [Account] set balance = balance +@amount where accountId=@toAccnt";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "update [Account] set balance = balance -@amount where accountId=@frmAccnt";
+                command.ExecuteNonQuery();
+
+                transaction.Commit();
+                con.Close();
+                return new Response { Status = "Success", Message = "transaction Successful" };
+
+            }
+            catch (Exception)
+            {
+
+                transaction.Rollback();
+                return new Response { Status = "Failed", Message = "transaction failed" };
             }
             finally
             {
