@@ -71,3 +71,7 @@ An Admin is able to login and create customers and accounts.
 		"toAccount":"6060001",
 		"Amount":1000
 		}
+
+	**Tranaction [HttpGet]**
+   
+	   https://api/customer/transactions
